@@ -9,10 +9,10 @@ vim.keymap.set('n', '<Leader>n', ':NvimTreeToggle<CR>')
 vim.keymap.set('n', '<Leader>m', ':NvimTreeFocus<CR>')
 
 -- better window navigation
-vim.keymap.set('n', '<C-h>', '<C-w>h')
-vim.keymap.set('n', '<C-j>', '<C-w>j')
-vim.keymap.set('n', '<C-k>', '<C-w>k')
-vim.keymap.set('n', '<C-l>', '<C-w>l')
+vim.keymap.set('n', '<Leader>h', '<C-w>h')
+vim.keymap.set('n', '<Leader>j', '<C-w>j')
+vim.keymap.set('n', '<Leader>k', '<C-w>k')
+vim.keymap.set('n', '<Leader>l', '<C-w>l')
 
 -- use alt + shift + hjkl to resize windows
 vim.keymap.set('n', '<S-M-J>', ':<C-U>resize -2<CR>')
