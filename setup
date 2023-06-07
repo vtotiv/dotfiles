@@ -4,4 +4,4 @@ CONFIG_PATH=$HOME/.config
 LOCAL_PATH=$HOME/.local
 
 # link nvim config
-ln -s $DOTFILES_PATH/config/nvim $HOME/.config
+ln -s $DOTFILES_PATH/config/nvim $CONFIG_PATH
