@@ -6,5 +6,5 @@ LOCAL_PATH=$HOME/.local
 # link nvim config
 ln -s $DOTFILES_PATH/config/nvim $CONFIG_PATH
 # link dmenu and dwm to config (not necessary but I like it there)
-ln -s $DOTFILES_PATH/config/dmenu $HOME/.config
-ln -s $DOTFILES_PATH/config/dwm $HOME/.config
+ln -s $DOTFILES_PATH/config/dmenu $CONFIG_PATH
+ln -s $DOTFILES_PATH/config/dwm $CONFIG_PATH
