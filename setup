@@ -5,3 +5,5 @@ LOCAL_PATH=$HOME/.local
 
 # link nvim config
 ln -s $DOTFILES_PATH/config/nvim $HOME/.config
+# link dmenu to config (not necessary but I like it there)
+ln -s $DOTFILES_PATH/config/dmenu $HOME/.config
