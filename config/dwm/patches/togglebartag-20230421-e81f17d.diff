@@ -1,0 +1,76 @@
+diff --git a/config.def.h b/config.def.h
+index 9efa774..6e005df 100644
+--- a/config.def.h
++++ b/config.def.h
+@@ -65,6 +65,7 @@ static const Key keys[] = {
+ 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
+ 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
+ 	{ MODKEY,                       XK_b,      togglebar,      {0} },
++	{ MODKEY|ShiftMask,             XK_b,      togglebar,      {.i = 1} },
+ 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
+ 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
+ 	{ MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
+diff --git a/dwm.c b/dwm.c
+index f1d86b2..2da996f 100644
+--- a/dwm.c
++++ b/dwm.c
+@@ -123,6 +123,7 @@ struct Monitor {
+ 	unsigned int sellt;
+ 	unsigned int tagset[2];
+ 	int showbar;
++	unsigned int barmask;
+ 	int topbar;
+ 	Client *clients;
+ 	Client *sel;
+@@ -640,6 +641,7 @@ createmon(void)
+ 	m->mfact = mfact;
+ 	m->nmaster = nmaster;
+ 	m->showbar = showbar;
++	m->barmask = showbar * TAGMASK;
+ 	m->topbar = topbar;
+ 	m->lt[0] = &layouts[0];
+ 	m->lt[1] = &layouts[1 % LENGTH(layouts)];
+@@ -704,7 +706,7 @@ drawbar(Monitor *m)
+ 	unsigned int i, occ = 0, urg = 0;
+ 	Client *c;
+ 
+-	if (!m->showbar)
++	if (!(m->tagset[m->seltags] & m->barmask))
+ 		return;
+ 
+ 	/* draw status first so it can be overdrawn by tags later */
+@@ -1715,7 +1717,16 @@ tile(Monitor *m)
+ void
+ togglebar(const Arg *arg)
+ {
+-	selmon->showbar = !selmon->showbar;
++	unsigned int ctag = selmon->tagset[selmon->seltags];
++
++	if(arg->i == 1 || ctag == TAGMASK){
++	    selmon->showbar = !selmon->showbar;
++	    selmon->barmask = selmon->showbar * TAGMASK;
++	}
++	else {
++	    selmon->barmask ^= ctag;
++	}
+ 	updatebarpos(selmon);
+ 	XMoveResizeWindow(dpy, selmon->barwin, selmon->wx, selmon->by, selmon->ww, bh);
+ 	arrange(selmon);
+@@ -1842,7 +1853,7 @@ updatebarpos(Monitor *m)
+ {
+ 	m->wy = m->my;
+ 	m->wh = m->mh;
+-	if (m->showbar) {
++	if ((m->tagset[m->seltags] & m->barmask)) {
+ 		m->wh -= bh;
+ 		m->by = m->topbar ? m->wy : m->wy + m->wh;
+ 		m->wy = m->topbar ? m->wy + bh : m->wy;
+@@ -2058,6 +2069,10 @@ view(const Arg *arg)
+ 	selmon->seltags ^= 1; /* toggle sel tagset */
+ 	if (arg->ui & TAGMASK)
+ 		selmon->tagset[selmon->seltags] = arg->ui & TAGMASK;
++	updatebarpos(selmon);
++	XMoveResizeWindow(dpy, selmon->barwin, selmon->wx, selmon->by, selmon->ww, bh);
+ 	focus(NULL);
+ 	arrange(selmon);
+ }
