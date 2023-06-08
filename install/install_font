@@ -1,0 +1,8 @@
+#!/bin/bash
+
+if [ -z "$DOTFILES_PATH" ]; then
+	echo "You're missing \$DOTFILES_PATH!"
+else
+	sudo mkdir -p /usr/share/fonts/TTF
+	sudo cp $DOTFILES_PATH/fonts/B612MonoNF-Regular-patched.ttf /usr/share/fonts/TTF
+fi
