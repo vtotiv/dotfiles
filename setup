@@ -9,3 +9,16 @@ ln -s $DOTFILES_PATH/config/nvim $CONFIG_PATH
 ln -s $DOTFILES_PATH/config/dmenu $CONFIG_PATH
 ln -s $DOTFILES_PATH/config/dwm $CONFIG_PATH
 ln -s $DOTFILES_PATH/config/st $CONFIG_PATH
+
+# link local/bin
+local_bin_src="$DOTFILES_PATH/local/bin"
+local_bin_dest="$LOCAL_PATH/bin"
+
+for file in "$local_bin_src"/*; do
+    ln -s "$file" "$local_bin_dest"
+done
+
+# link home/ and make the files hidden
+for file in "$DOTFILES_PATH/home"/*; do
+	ln -s $file "$HOME/.$(basename "$file")"
+done
