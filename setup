@@ -1,7 +1,6 @@
 #!/bin/bash
-DOTFILES_PATH=$(pwd)
-CONFIG_PATH=$HOME/.config
-LOCAL_PATH=$HOME/.local
+
+source paths
 
 # link nvim config
 ln -s $DOTFILES_PATH/config/nvim $CONFIG_PATH
@@ -11,11 +10,8 @@ ln -s $DOTFILES_PATH/config/dwm $CONFIG_PATH
 ln -s $DOTFILES_PATH/config/st $CONFIG_PATH
 
 # link local/bin
-local_bin_src="$DOTFILES_PATH/local/bin"
-local_bin_dest="$LOCAL_PATH/bin"
-
-for file in "$local_bin_src"/*; do
-    ln -s "$file" "$local_bin_dest"
+for file in "$DOTFILES_PATH/local/bin"/*; do
+    ln -s "$file" "$LOCAL_BIN_PATH"
 done
 
 # link home/ and make the files hidden

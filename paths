@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# edit your paths here
+
+# path of vtotiv/dotfiles
+DOTFILES_PATH=$(pwd)
+# path for your .config
+CONFIG_PATH=$HOME/.config
+# path for your .local
+LOCAL_PATH=$HOME/.local
+LOCAL_BIN_PATH=$LOCAL_PATH/bin
+
+# create directories
+mkdir -p $CONFIG_PATH
+mkdir -p $LOCAL_BIN_PATH
