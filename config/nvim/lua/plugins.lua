@@ -69,6 +69,15 @@ return require('packer').startup(function(use)
 		'hrsh7th/nvim-cmp',
 	}
 
+	use 'dart-lang/dart-vim-plugin'
+	use {
+		'akinsho/flutter-tools.nvim',
+		requires = {
+			'nvim-lua/plenary.nvim',
+			'stevearc/dressing.nvim', -- optional for vim.ui.select
+		},
+	}
+
 	if packer_bootstrap then
     	require('packer').sync()
   	end

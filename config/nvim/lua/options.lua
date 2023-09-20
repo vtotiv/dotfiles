@@ -28,3 +28,7 @@ vim.g.livepreview_previewer = 'zathura'
 -- replace gofmt with stricter gofumpt
 vim.g.go_fmt_command = "gopls"
 vim.g.go_gopls_gofumpt = 1
+
+-- dart config
+vim.g.dart_html_in_string = true
+vim.g.dart_format_on_save = true
