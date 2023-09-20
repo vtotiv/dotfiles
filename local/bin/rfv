@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+# 1. Search for text in files using Ripgrep
+# 2. Interactively narrow down the list using fzf
+# 3. Open the file in Vim
+# rg --color=always --line-number --no-heading --smart-case "${*:-}" |
+#   fzf --ansi \
+# 	  --preview "bat --style=numbers --theme=nord --color=always {1} --highlight-line {2}"
+# 	  --color=bg+:#3b4252,bg:#242933,spinner:#81a1c1,hl:#616e88,fg:#d8dee9,header:#616e88,info:#81a1c1,pointer:#81a1c1,marker:#81a1c1,fg+:#d8dee9,prompt:#81a1c1,hl+:#81a1c1l
+# 	  --cycle
+# 	  --reverse
+# 	  --tabstop=4
+#       --delimiter : \
+#       --preview-window 'up,60%,border-bottom,+{2}+3/3,~3' \
+#       --bind 'enter:become(nvim {1} +{2})'
+
+rg --color=always --line-number --no-heading --smart-case "${*:-}" |
+  fzf --ansi \
+      --color "hl:-1:underline,hl+:-1:underline:reverse" \
+      --delimiter : \
+      --preview 'bat --theme=nord --color=always {1} --highlight-line {2}' \
+      --preview-window 'up,60%,border-bottom,+{2}+3/3,~3' \
+      --bind 'enter:become(nvim {1} +{2})'
+	  --reverse
