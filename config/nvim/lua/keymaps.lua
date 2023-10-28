@@ -1,8 +1,10 @@
 -- set leader to Space
 vim.g.mapleader = ' '
 
--- Set copilot accept
-vim.api.nvim_set_keymap("i", "<C-J>", 'copilot#Accept("<CR>")', { silent = true, expr = true })
+-- Set copilot accept, next and previous
+vim.api.nvim_set_keymap("i", "<C-z>", 'copilot#Accept("<CR>")', { silent = true, expr = true })
+vim.keymap.set('i', '<C-u>', '<Plug>(copilot-next)')
+vim.keymap.set('i', '<C-i>', '<Plug>(copilot-previous)')
 
 -- remap most used Nvim funcs
 vim.keymap.set('n', '<Leader>n', ':NvimTreeToggle<CR>')
