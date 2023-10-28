@@ -9,11 +9,18 @@ static const int topbar             = 1;        /* 0 means bottom bar */
 static const int focusonwheel       = 0;
 static const char *fonts[]          = { "B612Mono Nerd Font:size=10" };
 static const char dmenufont[]       = "B612Mono Nerd Font:size=10";
-static const char col_gray1[]       = "#242933";
-static const char col_gray2[]       = "#5e81ac";
-static const char col_gray3[]       = "#d8dee9";
-static const char col_gray4[]       = "#eceff4";
-static const char col_cyan[]        = "#5E81AC";
+// nord
+// static const char col_gray1[]       = "#242933";
+// static const char col_gray2[]       = "#5e81ac";
+// static const char col_gray3[]       = "#d8dee9";
+// static const char col_gray4[]       = "#eceff4";
+// static const char col_cyan[]        = "#5E81AC";
+// rose-pine
+static const char col_gray1[]       = "#191724";
+static const char col_gray2[]       = "#31748f";
+static const char col_gray3[]       = "#e0def4";
+static const char col_gray4[]       = "#21202e";
+static const char col_cyan[]        = "#ebbcba";
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
