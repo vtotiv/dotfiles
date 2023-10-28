@@ -6,6 +6,10 @@ return require('packer').startup(function(use)
 	-- Colorscheme
 	-- use 'nordtheme/vim'
 	use 'shaunsingh/nord.nvim'
+	use {
+		'rose-pine/neovim',
+		as = 'rose-pine'
+	}
 
 	-- show indentation
 	use 'lukas-reineke/indent-blankline.nvim'
@@ -40,13 +44,13 @@ return require('packer').startup(function(use)
 	}
 		
 	-- treesitter
-	-- use {
-	-- 	'nvim-treesitter/nvim-treesitter',
-	-- 	run = function()
-	-- 		local ts_update = require('nvim-treesitter.install').update({ with_sync = true })
-	-- 		ts_update()
-	-- 	end,
-	-- }
+	use {
+		'nvim-treesitter/nvim-treesitter',
+		run = function()
+			local ts_update = require('nvim-treesitter.install').update({ with_sync = true })
+			ts_update()
+		end,
+	}
 
 	-- nvim tree
 	use {
@@ -69,6 +73,13 @@ return require('packer').startup(function(use)
 		'hrsh7th/nvim-cmp',
 	}
 
+	use {
+		'L3MON4D3/LuaSnip',
+		run = "make install_jsregexp",
+		'saadparwaiz1/cmp_luasnip',
+
+	}
+
 	use 'dart-lang/dart-vim-plugin'
 	use {
 		'akinsho/flutter-tools.nvim',
@@ -76,6 +87,11 @@ return require('packer').startup(function(use)
 			'nvim-lua/plenary.nvim',
 			'stevearc/dressing.nvim', -- optional for vim.ui.select
 		},
+	}
+
+	-- fzf
+	use { "ibhagwan/fzf-lua",
+		requires = { "nvim-tree/nvim-web-devicons" }
 	}
 
 	if packer_bootstrap then

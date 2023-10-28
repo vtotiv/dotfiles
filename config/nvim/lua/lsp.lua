@@ -1,15 +1,10 @@
-
  -- Set up nvim-cmp.
 local cmp = require'cmp'
 
 cmp.setup({
 	snippet = {
-    -- REQUIRED - you must specify a snippet engine
-	expand = function(args)
-    	-- vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
-    	-- require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
-    	-- require('snippy').expand_snippet(args.body) -- For `snippy` users.
-    	-- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
+		expand = function(args)
+		require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
 	end,
     },
     window = {
@@ -25,10 +20,7 @@ cmp.setup({
     }),
     sources = cmp.config.sources({
     	{ name = 'nvim_lsp' },
-      	-- { name = 'vsnip' }, -- For vsnip users.
-      	-- { name = 'luasnip' }, -- For luasnip users.
-      	-- { name = 'ultisnips' }, -- For ultisnips users.
-      	-- { name = 'snippy' }, -- For snippy users.
+		{ name = 'luasnip' }, -- For luasnip users.
     }, {
     	{ name = 'buffer' },
 	})
@@ -64,21 +56,39 @@ cmp.setup.cmdline(':', {
 -- Set up lspconfig.
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
-require'lspconfig'.gopls.setup{}
-require'lspconfig'.golangci_lint_ls.setup{}
+require'lspconfig'.gopls.setup{
+	capabilities = capabilities
+}
+require'lspconfig'.golangci_lint_ls.setup{
+	capabilities = capabilities
+}
 
-require'lspconfig'.dartls.setup{}
+require'lspconfig'.dartls.setup{
+	capabilities = capabilities
+}
 
-require'lspconfig'.docker_compose_language_service.setup{}
-require'lspconfig'.dockerls.setup{}
+require'lspconfig'.docker_compose_language_service.setup{
+	capabilities = capabilities
+}
+require'lspconfig'.dockerls.setup{
+	capabilities = capabilities
+}
 
-require'lspconfig'.tsserver.setup{}
+require'lspconfig'.tsserver.setup{
+	capabilities = capabilities
+}
 
-require'lspconfig'.pylsp.setup{}
+require'lspconfig'.pylsp.setup{
+	capabilities = capabilities
+}
 
-require'lspconfig'.bashls.setup{}
+require'lspconfig'.bashls.setup{
+	capabilities = capabilities
+}
 
-require'lspconfig'.texlab.setup{}
+require'lspconfig'.texlab.setup{
+	capabilities = capabilities
+}
 
 -- Hide all semantic highlights
 for _, group in ipairs(vim.fn.getcompletion("@lsp", "highlight")) do
