@@ -40,3 +40,14 @@ vim.keymap.set('n', '<Leader>ö', ':noh<CR>')
 -- untabs in insert mode
 vim.keymap.set('i', '<S-TAB>', '<C-D>')
 
+-- insert line without leaving normal mode
+vim.keymap.set('n', '<Leader>o', 'o<Esc>')
+vim.keymap.set('n', '<Leader>O', 'O<Esc>')
+
+-- fzf
+local fzflua = require('fzf-lua')
+vim.keymap.set('n', '<leader>ff', fzflua.files, { silent = true })
+vim.keymap.set('n', '<leader>fg', fzflua.grep_project, { silent = true })
+vim.keymap.set('n', '<leader>fv', fzflua.grep_visual, { silent = true })
+vim.keymap.set('n', '<leader>fc', fzflua.grep_cword, { silent = true })
+vim.keymap.set('n', '<leader>fC', fzflua.grep_cWORD, { silent = true })
