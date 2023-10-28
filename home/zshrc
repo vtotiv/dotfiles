@@ -124,6 +124,7 @@ alias get_mdf=". $DEVPATH/esp/esp-mdf/export.sh"
 
 alias r='lf'
 alias c='clear'
+alias p='python'
 
 alias hg='history | grep'
 
