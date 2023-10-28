@@ -110,30 +110,54 @@ unsigned int tabspaces = 4;
 /* Terminal colors (16 first used in escape sequence) */
 static const char *colorname[] = {
 	/* 8 normal colors */
-	"#3b4252", /* black   */
-	"#bf616a", /* red     */
-	"#a3be8c", /* green   */
-	"#ebcb8b", /* yellow  */
-	"#81a1c1", /* blue    */
-	"#b48ead", /* magenta */
-	"#88c0d0", /* cyan    */
-	"#e5e9f0", /* white   */
+	// nord
+	// "#3b4252", /* black   */
+	// "#bf616a", /* red     */
+	// "#a3be8c", /* green   */
+	// "#ebcb8b", /* yellow  */
+	// "#81a1c1", /* blue    */
+	// "#b48ead", /* magenta */
+	// "#88c0d0", /* cyan    */
+	// "#e5e9f0", /* white   */
+	// rose-pine
+	"#26233a",
+	"#eb6f92",
+	"#31748f",
+	"#f6c177",
+	"#9ccfd8",
+	"#c4a7e7",
+	"#ebbcba",
+	"#e0def4",
 
 	/* 8 bright colors */
-	"#4c566a", /* black   */
-	"#bf616a", /* red     */
-	"#a3be8c", /* green   */
-	"#ebcb8b", /* yellow  */
-	"#81a1c1", /* blue    */
-	"#b48ead", /* magenta */
-	"#8fbcbb", /* cyan    */
-	"#eceff4", /* white   */
+	// nord
+	// "#4c566a", /* black   */
+	// "#bf616a", /* red     */
+	// "#a3be8c", /* green   */
+	// "#ebcb8b", /* yellow  */
+	// "#81a1c1", /* blue    */
+	// "#b48ead", /* magenta */
+	// "#8fbcbb", /* cyan    */
+	// "#eceff4", /* white   */
+	// rose-pine
+	"#6e6a86",
+	"#eb6f92",
+	"#31748f",
+	"#f6c177",
+	"#9ccfd8",
+	"#c4a7e7",
+	"#ebbcba",
+	"#e0def4",
 
 	[255] = 0,
 
 	/* more colors can be added after 255 to use with DefaultXX */
-	"#d8dee9", /* default foreground colour */
-	"#242933", /* default background colour */
+	// nord
+	// "#d8dee9", /* default foreground colour */
+	// "#242933", /* default background colour */
+	// rose-pine
+	"#e0def4",
+	"#191724",
 };
 
 
