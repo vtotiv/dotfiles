@@ -13,6 +13,7 @@ vim.opt.clipboard:append({'unnamedplus'})
 
 -- copilot
 vim.g.copilot_no_tab_map = true
+vim.g.copilot_assume_mapped = true
 
 -- make warnings go away
 vim.g.loaded_perl_provider = 0
