@@ -1,6 +1,9 @@
 -- set leader to Space
 vim.g.mapleader = ' '
 
+-- map tab, I don't know why TAB doesn't work wihout it
+vim.api.nvim_set_keymap('i', '<Tab>', '<Tab>', { noremap = true, silent = true })
+
 -- Set copilot accept, next and previous
 vim.api.nvim_set_keymap("i", "<C-z>", 'copilot#Accept("<CR>")', { silent = true, expr = true })
 vim.keymap.set('i', '<C-u>', '<Plug>(copilot-next)')
