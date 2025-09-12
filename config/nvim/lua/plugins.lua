@@ -94,6 +94,12 @@ return require('packer').startup(function(use)
 		requires = { "nvim-tree/nvim-web-devicons" }
 	}
 
+	-- formatting and linting
+	use {
+		'stevearc/conform.nvim',
+		opts = {},
+	}
+
 	if packer_bootstrap then
     	require('packer').sync()
   	end

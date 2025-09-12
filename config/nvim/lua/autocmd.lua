@@ -10,3 +10,11 @@ vim.api.nvim_create_autocmd("BufEnter", {
 
 -- open nvim-tree on startup when no name or file, but don't focus if file given
 vim.api.nvim_create_autocmd({ "VimEnter" }, { callback = open_nvim_tree })
+
+-- Format on save with conform.nvim
+vim.api.nvim_create_autocmd("BufWritePre", {
+  pattern = { "*.js", "*.jsx", "*.ts", "*.tsx", "*.json", },
+  callback = function(args)
+    require("conform").format({ bufnr = args.buf })
+  end,
+})
