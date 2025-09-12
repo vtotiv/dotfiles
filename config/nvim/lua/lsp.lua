@@ -91,7 +91,18 @@ require'lspconfig'.texlab.setup{
 }
 
 require'lspconfig'.eslint.setup{
-	capabilities = capabilities
+	capabilities = capabilities,
+	settings = {
+		cmd = { "eslint_d", "--stdio" },
+		run = "onType",
+		experimental = {
+			useFlatConfig = true,
+		},
+		rules = {},
+		workingDirectory = {
+			mode = "auto"
+		}
+	}
 }
 
 -- Hide all semantic highlights
