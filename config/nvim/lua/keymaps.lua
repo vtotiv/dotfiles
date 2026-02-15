@@ -47,6 +47,9 @@ vim.keymap.set('i', '<S-TAB>', '<C-D>')
 vim.keymap.set('n', '<Leader>o', 'o<Esc>')
 vim.keymap.set('n', '<Leader>O', 'O<Esc>')
 
+-- copy current relative path to clipboard
+vim.keymap.set("n", "<leader>cf", ':let @+ = expand("%")<CR>', { desc = "Copy relative path" })
+
 -- fzf
 local fzflua = require('fzf-lua')
 vim.keymap.set('n', '<leader>ff', fzflua.files, { silent = true })
