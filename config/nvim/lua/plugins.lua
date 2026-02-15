@@ -25,6 +25,19 @@ return require('packer').startup(function(use)
 
 	-- copilot
 	use 'github/copilot.vim'
+	use {
+	  'CopilotC-Nvim/CopilotChat.nvim',
+	  run = 'make tiktoken',
+	  requires = {
+		'nvim-lua/plenary.nvim',
+	  },
+	  config = function()
+		-- Your configuration goes here, for example:
+		-- require('CopilotChat').setup {
+		--   -- See Configuration section for options
+		-- }
+	  end,
+	}
 	
 	-- go in vim
 	use 'fatih/vim-go'
@@ -46,6 +59,7 @@ return require('packer').startup(function(use)
 	-- treesitter
 	use {
 		'nvim-treesitter/nvim-treesitter',
+		branch = 'main',
 		run = function()
 			local ts_update = require('nvim-treesitter.install').update({ with_sync = true })
 			ts_update()
@@ -99,6 +113,7 @@ return require('packer').startup(function(use)
 		'stevearc/conform.nvim',
 		opts = {},
 	}
+
 
 	if packer_bootstrap then
     	require('packer').sync()
