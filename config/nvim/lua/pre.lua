@@ -1,3 +1,5 @@
+vim.g.mapleader = " "
+
 function ensure_packer()
 	local fn = vim.fn
 	local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"

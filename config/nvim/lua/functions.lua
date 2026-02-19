@@ -22,7 +22,6 @@ function open_nvim_tree()
 	require("nvim-tree.api").tree.toggle({ focus = false, find_file = true })
 end
 
-vim.g.mapleader = " "
 function nvim_tree_on_attach(bufnr)
 	local api = require("nvim-tree.api")
 

@@ -1,5 +1,4 @@
 -- set leader to Space
-vim.g.mapleader = " "
 
 -- map tab, I don't know why TAB doesn't work wihout it
 vim.api.nvim_set_keymap("i", "<Tab>", "<Tab>", { noremap = true, silent = true })
