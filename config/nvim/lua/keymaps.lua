@@ -1,10 +1,10 @@
 -- set leader to Space
 
 -- map tab, I don't know why TAB doesn't work wihout it
-vim.api.nvim_set_keymap("i", "<Tab>", "<Tab>", { noremap = true, silent = true })
+vim.keymap.set("i", "<Tab>", "<Tab>", { silent = true })
 
 -- Set copilot accept, next and previous
-vim.api.nvim_set_keymap("i", "<C-z>", 'copilot#Accept("<CR>")', { silent = true, expr = true })
+vim.keymap.set("i", "<C-z>", 'copilot#Accept("<CR>")', { silent = true, expr = true, replace_keycodes = false })
 vim.keymap.set("i", "<C-u>", "<Plug>(copilot-next)")
 vim.keymap.set("i", "<C-i>", "<Plug>(copilot-previous)")
 
