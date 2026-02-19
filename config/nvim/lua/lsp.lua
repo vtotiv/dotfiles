@@ -56,41 +56,29 @@ cmp.setup.cmdline(":", {
 -- Set up lspconfig.
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
-require("lspconfig").gopls.setup({
-	capabilities = capabilities,
-})
-require("lspconfig").golangci_lint_ls.setup({
-	capabilities = capabilities,
-})
+local servers = {
+	"gopls",
+	"golangci_lint_ls",
+	"dartls",
+	"docker_compose_language_service",
+	"dockerls",
+	"ts_ls",
+	"pyright",
+	"pylsp",
+	"bashls",
+	"texlab",
+	"graphql",
+}
 
-require("lspconfig").dartls.setup({
-	capabilities = capabilities,
-})
+for _, server in ipairs(servers) do
+	vim.lsp.config[server] = {
+		capabilities = capabilities,
+	}
+	vim.lsp.enable(server)
+end
 
-require("lspconfig").docker_compose_language_service.setup({
-	capabilities = capabilities,
-})
-require("lspconfig").dockerls.setup({
-	capabilities = capabilities,
-})
-
-require("lspconfig").ts_ls.setup({
-	capabilities = capabilities,
-})
-
-require("lspconfig").pylsp.setup({
-	capabilities = capabilities,
-})
-
-require("lspconfig").bashls.setup({
-	capabilities = capabilities,
-})
-
-require("lspconfig").texlab.setup({
-	capabilities = capabilities,
-})
-
-require("lspconfig").eslint.setup({
+-- ESLint with specific settings
+vim.lsp.config.eslint = {
 	capabilities = capabilities,
 	settings = {
 		cmd = { "eslint_d", "--stdio" },
@@ -103,11 +91,10 @@ require("lspconfig").eslint.setup({
 			mode = "auto",
 		},
 	},
-})
-
-require("lspconfig").graphql.setup({})
+}
+vim.lsp.enable("eslint")
 
 -- Hide all semantic highlights
-for _, group in ipairs(vim.fn.getcompletion("@lsp", "highlight")) do
-	vim.api.nvim_set_hl(0, group, {})
-end
+-- for _, group in ipairs(vim.fn.getcompletion("@lsp", "highlight")) do
+-- 	vim.api.nvim_set_hl(0, group, {})
+-- end
