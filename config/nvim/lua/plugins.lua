@@ -1,117 +1,108 @@
-local packer_bootstrap = ensure_packer()
+return {
+	-- Theme
+	"shaunsingh/nord.nvim",
+	{ "rose-pine/neovim", name = "rose-pine", lazy = false, priority = 1000 },
 
-return require("packer").startup(function(use)
-	use("wbthomason/packer.nvim")
-
-	-- Colorscheme
-	-- use 'nordtheme/vim'
-	use("shaunsingh/nord.nvim")
-	use({
-		"rose-pine/neovim",
-		as = "rose-pine",
-	})
-
-	-- show indentation
-	use("lukas-reineke/indent-blankline.nvim")
-
-	-- comments with gc(c)
-	use("tomtom/tcomment_vim")
-
-	-- Git in nvim
-	use("tpope/vim-fugitive")
-
-	-- highlight unique letter in each word
-	use("unblevable/quick-scope")
-
-	-- copilot
-	use("github/copilot.vim")
-	use({
-		"CopilotC-Nvim/CopilotChat.nvim",
-		run = "make tiktoken",
-		requires = {
-			"nvim-lua/plenary.nvim",
-		},
-		config = function()
-			-- Your configuration goes here, for example:
-			-- require('CopilotChat').setup {
-			--   -- See Configuration section for options
-			-- }
-		end,
-	})
-
-	-- go in vim
-	use("fatih/vim-go")
-
-	-- lsp
-	use({
-		"williamboman/mason.nvim",
-		run = ":MasonUpdate",
-		"williamboman/mason-lspconfig.nvim",
-		"neovim/nvim-lspconfig",
-	})
-
-	-- Latex Live previews side by side
-	use({
-		"xuhdev/vim-latex-live-preview",
-		ft = { "tex" },
-	})
-
-	-- treesitter
-	use({
-		"nvim-treesitter/nvim-treesitter",
-		branch = "main",
-		run = function()
-			local ts_update = require("nvim-treesitter.install").update({ with_sync = true })
-			ts_update()
-		end,
-	})
-
-	-- nvim tree
-	use({
+	-- UI Enhancements
+	{ "lukas-reineke/indent-blankline.nvim", main = "ibl" },
+	"unblevable/quick-scope",
+	{
 		"nvim-tree/nvim-tree.lua",
-		requires = {
-			"nvim-tree/nvim-web-devicons",
-		},
+		dependencies = { "nvim-tree/nvim-web-devicons" },
 		config = function()
-			require("nvim-tree").setup({
-				on_attach = nvim_tree_on_attach,
-			})
+			local api = require("nvim-tree.api")
+
+			local function on_attach(bufnr)
+				local function opts(desc)
+					return {
+						desc = "nvim-tree: " .. desc,
+						buffer = bufnr,
+						noremap = true,
+						silent = true,
+						nowait = true,
+					}
+				end
+
+				api.config.mappings.default_on_attach(bufnr)
+
+				vim.keymap.set("n", "<Leader>v", api.node.open.vertical, opts("Open: Vertical Split"))
+				vim.keymap.set("n", "<Leader>s", api.node.open.horizontal, opts("Open: Horizontal Split"))
+				vim.keymap.set("n", "<Leader>c", api.tree.change_root_to_node, opts("CD"))
+			end
+
+			require("nvim-tree").setup({ on_attach = on_attach })
 		end,
-	})
+	},
 
-	use({
-		"hrsh7th/cmp-nvim-lsp",
-		"hrsh7th/cmp-buffer",
-		"hrsh7th/cmp-path",
-		"hrsh7th/cmp-cmdline",
-		"hrsh7th/nvim-cmp",
-	})
+	-- Git
+	"tpope/vim-fugitive",
 
-	use({
-		"L3MON4D3/LuaSnip",
-		run = "make install_jsregexp",
-		"saadparwaiz1/cmp_luasnip",
-	})
-
-	use("dart-lang/dart-vim-plugin")
-	use({
-		"akinsho/flutter-tools.nvim",
-		requires = {
-			"nvim-lua/plenary.nvim",
-			"stevearc/dressing.nvim", -- optional for vim.ui.select
+	-- Copilot
+	"github/copilot.vim",
+	{
+		"CopilotC-Nvim/CopilotChat.nvim",
+		branch = "main",
+		dependencies = {
+			{ "github/copilot.vim" },
+			{ "nvim-lua/plenary.nvim" },
 		},
-	})
-
-	-- fzf
-	use({ "ibhagwan/fzf-lua", requires = { "nvim-tree/nvim-web-devicons" } })
-
-	-- formatting and linting
-	use({
-		"stevearc/conform.nvim",
+		build = "make tiktoken",
 		opts = {},
-	})
+	},
 
-	if packer_bootstrap then
-		require("packer").sync()
-	end
-end)
+	-- LSP & Autocomplete
+	"neovim/nvim-lspconfig",
+	{
+		"hrsh7th/nvim-cmp",
+		dependencies = {
+			"hrsh7th/cmp-nvim-lsp",
+			"hrsh7th/cmp-buffer",
+			"hrsh7th/cmp-path",
+			"hrsh7th/cmp-cmdline",
+			"L3MON4D3/LuaSnip",
+			"saadparwaiz1/cmp_luasnip",
+		},
+	},
+
+	-- Treesitter
+	{
+		"nvim-treesitter/nvim-treesitter",
+		build = ":TSUpdate",
+	},
+
+	-- Formatting
+	{
+		"stevearc/conform.nvim",
+		opts = {
+			format_on_save = { timeout_ms = 500 },
+			formatters_by_ft = {
+				javascript = { "prettier" },
+				typescript = { "prettier" },
+				javascriptreact = { "prettier" },
+				typescriptreact = { "prettier" },
+				json = { "prettier" },
+				graphql = { "prettier" },
+				python = { "black" },
+				yaml = { "prettier" },
+				lua = { "stylua" },
+				go = { "gofumpt" },
+				dart = { "dart_format" },
+			},
+		},
+	},
+
+	-- Fuzzy Finding
+	{
+		"ibhagwan/fzf-lua",
+		dependencies = { "nvim-tree/nvim-web-devicons" },
+	},
+
+	-- Language Specific
+	{
+		"akinsho/flutter-tools.nvim",
+		dependencies = { "nvim-lua/plenary.nvim", "stevearc/dressing.nvim" },
+	},
+	{ "xuhdev/vim-latex-live-preview", ft = "tex" },
+
+	"numToStr/Comment.nvim",
+}
